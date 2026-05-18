@@ -107,7 +107,7 @@ function Portfolio() {
                 <a href="#projects" className="inline-flex items-center gap-2 glass px-6 py-3 rounded-full text-sm font-medium hover:bg-card hover:scale-105 transition">
                   <Download className="w-4 h-4" /><span>View work</span>
                 </a>
-                <a href="/Alisha_Aggarwal_Resume.pdf" download="Alisha_Aggarwal_Resume.pdf" className="inline-flex items-center gap-2 glass px-6 py-3 rounded-full text-sm font-medium hover:bg-card hover:scale-105 transition">
+                <a href="/Alisha_Aggarwal (1) (1).pdf" download="Alisha_Aggarwal_Resume.pdf" className="inline-flex items-center gap-2 glass px-6 py-3 rounded-full text-sm font-medium hover:bg-card hover:scale-105 transition">
                   <Download className="w-4 h-4" /><span>Download resume</span>
                 </a>
               </div>
