@@ -1,0 +1,130 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 1rem;
+  --background: oklch(0.14 0.03 280);
+  --foreground: oklch(0.97 0.01 280);
+  --card: oklch(0.18 0.04 280);
+  --card-foreground: oklch(0.97 0.01 280);
+  --primary: oklch(0.72 0.22 330);
+  --primary-foreground: oklch(0.14 0.03 280);
+  --secondary: oklch(0.75 0.18 60);
+  --secondary-foreground: oklch(0.14 0.03 280);
+  --accent: oklch(0.7 0.2 200);
+  --accent-foreground: oklch(0.14 0.03 280);
+  --muted: oklch(0.22 0.03 280);
+  --muted-foreground: oklch(0.72 0.03 280);
+  --border: oklch(0.28 0.04 280);
+  --ring: oklch(0.72 0.22 330);
+
+  --gradient-primary: linear-gradient(135deg, oklch(0.72 0.22 330), oklch(0.7 0.2 280), oklch(0.7 0.2 200));
+  --gradient-warm: linear-gradient(135deg, oklch(0.75 0.18 60), oklch(0.72 0.22 330));
+  --gradient-mesh: radial-gradient(at 20% 20%, oklch(0.72 0.22 330 / 0.35) 0px, transparent 50%),
+                   radial-gradient(at 80% 10%, oklch(0.7 0.2 200 / 0.3) 0px, transparent 50%),
+                   radial-gradient(at 60% 80%, oklch(0.75 0.18 60 / 0.25) 0px, transparent 50%);
+  --shadow-glow: 0 20px 60px -15px oklch(0.72 0.22 330 / 0.4);
+  --shadow-soft: 0 10px 40px -10px oklch(0 0 0 / 0.5);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    background-image: var(--gradient-mesh);
+    background-attachment: fixed;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: var(--gradient-primary);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-shift 6s ease infinite;
+  }
+  .bg-gradient-primary { background: var(--gradient-primary); background-size: 200% 200%; animation: gradient-shift 8s ease infinite; }
+  .bg-gradient-warm { background: var(--gradient-warm); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .glass {
+    background: oklch(0.2 0.03 280 / 0.5);
+    backdrop-filter: blur(20px);
+    border: 1px solid oklch(1 0 0 / 0.08);
+  }
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  .animate-float-slow { animation: float 10s ease-in-out infinite; }
+  .animate-spin-slow { animation: spin 20s linear infinite; }
+  .animate-spin-reverse { animation: spin 25s linear infinite reverse; }
+  .animate-blob { animation: blob 18s ease-in-out infinite; }
+  .marquee {
+    display: flex;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 1rem;
+    animation: marquee 30s linear infinite;
+    flex-shrink: 0;
+  }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  .card-tilt { transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s; }
+  .card-tilt:hover { transform: translateY(-6px); }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, -30px) scale(1.1); }
+  66% { transform: translate(-30px, 30px) scale(0.95); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
